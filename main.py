@@ -19,7 +19,6 @@ posts: list[dict] = [
         "title": "Python is Great for Web Development",
         "content": "Python is a great language for web development, and FastAPI makes it even better.",
         "date_posted": "April 21, 2025",
-        "chat": "Are you available now",
     },
 ]
 
@@ -27,9 +26,10 @@ posts: list[dict] = [
 
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+@app.get("/posts", response_class=HTMLResponse, include_in_schema=False)
 def home():
-    return {"message": "Hello World!"}
+    return f"<h1>{posts[0]['title']}</h1>"
 
 
 @app.get("/api/posts")
